@@ -1,0 +1,78 @@
+<!doctype html>
+<html xmlns:th="http://www.thymeleaf.org" lang="es">
+  	<head>
+    	<!-- Required meta tags -->
+    	<meta charset="utf-8">
+    	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    	<!-- Bootstrap CSS -->
+		<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" 
+		integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+		<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" 
+		integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
+
+		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.7.0/animate.min.css">
+		
+		<link rel="stylesheet" href="/css/login.css">
+		
+		<title>Bookstore</title>
+  	</head>
+
+	<body class="bg-light">
+
+		<div class="container-fluid">
+			
+			<div class="row p-5 fullcontent">
+				<div class="col-md-8 align-self-center">
+					<div class="headings animated fadeInLeft">
+
+						<img src="/img/logo-bookstore.png" height="120" alt="logotipo">
+
+						<h2 class="my-4 animated fadeInDown delay-1s" >Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptatem minima libero, quisquam voluptates reprehenderit quia! Sit vel vero officiis doloribus?Lorem ipsum dolor sit amet consectetur adipisicing elit. Repellat ea nisi facere earum optio eos dolorum ipsam, quae nemo incidunt!</h2>
+						
+						<hr class="animated fadeIn delay-1s">
+
+						<h2 class="animated fadeIn delay-1s" >
+							Coded and designed by: <br> 
+							Julio Che Moreno & Cristian Boada.
+						</h2>
+
+					</div>
+				</div>
+
+				<div class="col-md-4 align-self-center">
+					<div class="formbox px-4 pb-3 animated fadeIn delay-1s">
+
+						<h3 class="py-3" >Iniciar sesión</h3>
+
+						<form id="form" action="" method="post">							
+							<label for="">Correo electrónico</label>
+							<input type="text" name="email" class="asd"/>
+							
+							<label for="">Contraseña</label>
+							<input type="password" name="password" class="asd"/>
+							
+							<button type="button" class="btn btn-outline-light btn-md btn-block mb-3">Iniciar sesión</button>
+							
+							
+							<label for="">¿Aún no tienes cuenta?</label>
+							<a th:href="@{/auth/register}" class="btn btn-outline-secondary btn-md btn-block mb-3 mt-2">Regístrarse</a>
+							
+						</form>	
+					</div>
+				</div>
+			</div>
+
+		</div>
+		
+
+				
+		<!-- Optional JavaScript -->
+		<!-- jQuery first, then Popper.js, then Bootstrap JS -->
+		<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" 
+		integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+		<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" 
+		integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+	</body>
+</html>
