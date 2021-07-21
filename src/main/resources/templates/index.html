@@ -194,8 +194,9 @@
 		
 		<script type="text/javascript">
 		function loadingAjax(div_id) {
-			
-			var divIdHtml = $("#"+div_id).html();
+			$("#loading").hide();
+			$(".chekcToken").hide();
+			/*var divIdHtml = $("#"+div_id).html();
 			
 			token = sessionStorage.getItem('token')
 			if (token != null) {
@@ -225,7 +226,7 @@
 				
 			} else{
 				window.location.href = "auth/login";
-			}
+			}*/
 			
 			
 		}
