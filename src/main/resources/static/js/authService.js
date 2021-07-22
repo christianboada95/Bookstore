@@ -100,6 +100,11 @@ function currentUser(callback) {
 
 /** Testing */
 $(function(){
+	var emailRegex = /^([a-zA-Z0-9_.+-])+\@(([a-zA-Z0-9-])+\.)+([a-zA-Z0-9]{2,4})+$/
+	var usernameRegex = /^[a-zA-Z0-9](_(?!(\.|_))|\.(?!(_|\.))|[a-zA-Z0-9]){6,18}[a-zA-Z0-9]$/;
+	var passRegex = /^(?=\w*\d)(?=\w*[A-Z])(?=\w*[a-z])\S{8,16}$/;
+	var registerForm = $("#registerForm");
+	registerForm.validate();
 	
 	// Login form
 	$("#loginForm button").click((e) => {
@@ -134,14 +139,34 @@ $(function(){
 				department: $("#department").val(),
 				city: $("#city").val(),
 				
-				card: creditCard
+				//card: creditCard
 		}
 		
-		register(usr, (data) => {
-			alert("Usuario registrado");
-			console.log("Usuario registrado", data);
-			window.location.href = "/auth/login";
-		})
+		if (!emailRegex.test(usr.email)) {
+			alert("Email no válido");
+			return;
+		}
+		
+		if (!usernameRegex.test(usr.username)) {
+			alert("Username no válido");
+			return;
+		}
+		
+		if (!passRegex.test(usr.password)) {
+			alert("Password no válido");
+			return;
+		}
+		
+		if (registerForm.valid()) {
+			register(usr, (data) => {
+				alert("Usuario registrado");
+				console.log("Usuario registrado", data);
+				window.location.href = "/auth/login";
+			})			
+		} else {
+			alert("Datos no válidos");
+		}
+		
 	});
 	
 	//logout();

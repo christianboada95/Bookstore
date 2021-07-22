@@ -63,7 +63,7 @@ public class Customer {
 	
 	@OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
 	@JsonBackReference
-    @JoinColumn(unique = true)
+    @JoinColumn(unique = true, nullable=true)
 	private CreditCard card;
 
 	public Customer() {
