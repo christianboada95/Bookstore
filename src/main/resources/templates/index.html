@@ -48,10 +48,10 @@
 
 						<ul class="navbar-nav">
 							<li class="nav-item">
-								<a class="nav-link chekcToken" th:href="@{/auth/login}">Inisiar sesión</a>
+								<a class="nav-link chekcToken" th:href="@{/auth/login}">Iniciar sesión</a>
 							</li>
 							<li class="nav-item">
-								<a class="nav-link chekcToken" >Registrar</a>
+								<a class="nav-link chekcToken" th:href="@{/auth/register}">Registrar</a>
 							</li>
 
 							<li class="nav-item">
@@ -194,40 +194,15 @@
 		
 		<script type="text/javascript">
 		function loadingAjax(div_id) {
+			
 			$("#loading").hide();
-			$(".logout").hide();
-			/*var divIdHtml = $("#"+div_id).html();
-			
 			token = sessionStorage.getItem('token')
-			if (token != null) {
-				
-				$.ajax({
-					type: "GET",
-					url: "http://localhost:8080/api/auth/user",
-					headers: {"Authorization": token},
-					beforeSend: function() {
-						$("#loading-image").show();
-			       	},
-			       	success: (data) => {
-			              //$("#"+div_id).html(divIdHtml + msg);
-			       		//console.log(data);
-						$("#loading").hide();
-						$(".chekcToken").hide();
-			       	},
-			       	error: (err) => {
-			       		sessionStorage.removeItem('token')
-			       		
-			       		window.location.href = "/auth/login";
-			   		},
-			   		complete: (xhr, status) => {
-						console.log("loading complete", status);						
-			   		}
-				});
-				
-			} else{
-				window.location.href = "auth/login";
-			}*/
 			
+			if(token != null){
+				$(".chekcToken").hide();
+			}else{
+				$(".logout").hide();
+			}		
 			
 		}
 		</script>

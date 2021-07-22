@@ -63,24 +63,24 @@ public class BookController {
 		List<Book> searchResults = null;
 		
 		// Categorias seleccionadas del usuario
-		String username = principal.getName();
-		Set<Category> categories = customerRepository.findByUsername(username).getCategories();
+		//String username = principal.getName();
+		//Set<Category> categories = customerRepository.findByUsername(username).getCategories();
 		
 		// sino tiene entonces no es usuario especializado
-		if(categories.isEmpty()) {
+		/*if(categories.isEmpty()) {
 			// Categorías por defecto
 			//System.out.println("Aqui si entró");
 			categories.add(categoryRepository.findByName("Best seller"));
 			categories.add(categoryRepository.findByName("New"));
-		}
+		}*/
 		
 		
 		// Try get book with the parameters
 		try {
 			//searchResults = bookRepository.findByTitleContaining(title);
 			//searchResults = bookRepository.findByTitleContainingAndIsbnContaining(title, isbn);
-			//searchResults = bookRepository.findByTitleContainingAndIsbnContainingAndAuthor_nameContaining(title, isbn, author);
-			searchResults = bookRepository.findByTitleContainingAndIsbnContainingAndAuthor_nameContainingOrCategoriesContaining(title, isbn, author, categories);
+			searchResults = bookRepository.findByTitleContainingAndIsbnContainingAndAuthor_nameContaining(title, isbn, author);
+			//searchResults = bookRepository.findByTitleContainingAndIsbnContainingAndAuthor_nameContainingOrCategoriesContaining(title, isbn, author, categories);
 			//searchResults = bookRepository.findByCategories_nameContaining(category);
 		} catch (Exception e) {
 			// TODO: handle exception
