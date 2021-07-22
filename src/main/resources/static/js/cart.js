@@ -54,6 +54,7 @@ class shoppingCart {
 		}
 		
 		// Actualizar el DOM
+		$('#total').html('<strong>Total: $'+ this.total +'</strong>');
 	}
 	
 	buyOrder(client, shipping) {
@@ -106,6 +107,7 @@ function addProductsSales(product, q) {
         '<td >' +
             '<input type="number" class="form-control" id="item-cantidad-'+ product.id +'" value="'+q+'" >' +
         '</td>' +
+        '<td width="10%" class=""><strong>$'+ product.price +'</strong></td>' +
         '<td class="text-center">' +
             '<button type="submit" class="btn btn-primary btn-block" onClick="addOrder(' + product.id + ')" >Agregar</button>' +
         '</td>' +
@@ -117,6 +119,8 @@ function showCart() {
 	carrito.details.forEach(detail => {
 		addProductsSales(detail.book, detail.quantity);
 	})
+	
+	carrito.updateTotal();
 }
 
 function addOrder(id) {

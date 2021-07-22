@@ -50,7 +50,7 @@ function searchBooks(search, callback) {
 	$.ajax("api/books/search", {
 		type: "GET",
 		//contentType: "application/json",
-		headers: {"Authorization": sessionStorage.getItem('token')},
+		//headers: {"Authorization": sessionStorage.getItem('token')},
 		data: search,//jQuery.param(JSON.stringify(search)),
 		success: function(data) {
 			var books = JSON.parse(JSON.stringify(data));

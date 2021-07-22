@@ -134,6 +134,7 @@ function infobook(id){
     
     getBook(id, (book) => {
         //console.log(book);
+        $( "#cover" ).replaceWith( '<img id="cover" src="' + book.cover  + '" class="card-img-top" alt="Inventario">' );
         
         $( "#title" ).replaceWith( "<h2>" + book.title  + "</h2>" );        
         $( "#author" ).replaceWith( "<p class='m-0'><b>Autor:</b> " + book.author.name  + "</p>" );
