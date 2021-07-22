@@ -77,7 +77,7 @@ public class BookController {
 		
 		// Try get book with the parameters
 		try {
-			//searchResults = bookRepository.findByTitleContaining(title);
+			searchResults = bookRepository.findByTitleContaining(title);
 			//searchResults = bookRepository.findByTitleContainingAndIsbnContaining(title, isbn);
 			searchResults = bookRepository.findByTitleContainingAndIsbnContainingAndAuthor_nameContaining(title, isbn, author);
 			//searchResults = bookRepository.findByTitleContainingAndIsbnContainingAndAuthor_nameContainingOrCategoriesContaining(title, isbn, author, categories);

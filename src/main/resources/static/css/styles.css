@@ -144,3 +144,16 @@ a.a-book {
     left: 8px;      
     background: #D17900;  
 }
+
+label.error {
+    color: red;
+    font-size: 1rem;
+    display: block;
+    margin-top: 5px;
+}
+
+input.error {
+    border: 1px dashed red;
+    font-weight: 300;
+    color: red;
+}
