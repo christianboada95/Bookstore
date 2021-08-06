@@ -39,6 +39,11 @@ public class BookstoreController {
 		return "auth/register";
 	}
 	
+	@GetMapping("/profile")
+	public String profile() {
+		return "user/profile";
+	}
+	
 	@GetMapping("/admin")
 	public String admin() {
 		return "admin/admin";
