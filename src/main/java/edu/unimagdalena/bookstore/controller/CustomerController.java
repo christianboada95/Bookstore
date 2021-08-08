@@ -1,8 +1,13 @@
 package edu.unimagdalena.bookstore.controller;
 
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.List;
 import java.util.Optional;
 
+import org.apache.commons.io.FilenameUtils;
+import org.assertj.core.util.diff.myers.PathNode;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -11,7 +16,9 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.multipart.MultipartFile;
 
 import edu.unimagdalena.bookstore.entity.users.Customer;
 import edu.unimagdalena.bookstore.repository.CustomerRepository;
@@ -66,6 +73,35 @@ public class CustomerController {
 		customer.setPostcode(user.getPostcode());
 		// customer.setCard(user.getCard());
 		// customer.setCategories(user.getCategories());
+
+		return ResponseEntity.ok(customerRepository.save(customer));
+	}
+
+	@PutMapping("/customers/update_image/{username}")
+	public ResponseEntity<Customer> updateCustomerImage(@PathVariable String username,
+			@RequestParam("image") MultipartFile image) {
+
+		Customer customer = customerRepository.findByUsername(username);
+
+		if (customer == null) {
+			return ResponseEntity.notFound().build();
+		}
+
+		if (!image.isEmpty()) {
+			String route = "C://uploads//image";
+
+			try {
+				byte[] bytes = image.getBytes();
+				String extension = FilenameUtils.getExtension(image.getOriginalFilename());
+				String nameImage = customer.getUsername() + "." + extension;
+				Path AbsolutRoute = Paths.get(route + "//" + nameImage);
+				Files.write(AbsolutRoute, bytes);
+				customer.setImage(nameImage);
+
+			} catch (Exception e) {
+				System.out.println("Error con la imagen: " + e.toString());
+			}
+		}
 
 		return ResponseEntity.ok(customerRepository.save(customer));
 	}

@@ -23,6 +23,7 @@ function loadingAjax(div_id) {
         $("#postal").val(data.postcode);
         $("#city").val(data.city);
         $("#department").val(data.department);
+        $("#profileImg").attr("src", "/image/" + data.image);
         username = data.username;
       },
       error: (err) => {
@@ -38,6 +39,38 @@ function loadingAjax(div_id) {
     window.location.href = "auth/login";
   }
 }
+
+$("#btnImageUpdate").click(function () {
+  $("#image").click();
+});
+
+$("#image").change(function () {
+  token = sessionStorage.getItem("token");
+  if (token != null) {
+    let form = new FormData();
+    form.append("image", $("#image").get(0).files[0]);
+
+    $.ajax({
+      type: "PUT",
+      async: false,
+      dataType: "json",
+      contentType: false,
+      url: "http://localhost:8080/api/customers/update_image/" + username,
+      headers: { Authorization: token },
+      data: form,
+      cache: false,
+      processData: false,
+      success: function (response) {
+        let ruta = "/image/" + response.image + "?" + new Date().getTime();
+        $("#profileImg").attr("src", ruta);
+        //$("#profileImgNavbar").attr("src", ruta);
+      },
+      error: function (e) {
+        console.log("error: ", e);
+      },
+    });
+  }
+});
 
 function inputsDisable(bool) {
   $("#Names").prop("disabled", bool);

@@ -14,9 +14,9 @@ import edu.unimagdalena.bookstore.entity.users.Customer;
 import edu.unimagdalena.bookstore.repository.CustomerRepository;
 
 public class CustomersTableSeeder {
-	
+
 	private Faker faker = new Faker(new Locale("es-MX"));
-	
+
 	private CustomerRepository customerRepository;
 	private BCryptPasswordEncoder bCryptPasswordEncoder;
 
@@ -24,12 +24,12 @@ public class CustomersTableSeeder {
 		this.customerRepository = customerRepository;
 		this.bCryptPasswordEncoder = new BCryptPasswordEncoder();
 	}
-	
+
 	public ArrayList<Customer> run() {
 		ArrayList<Customer> customerList = new ArrayList<Customer>();
-		
+
 		Category category = new Category(faker.book().genre());
-		
+
 		Customer c = new Customer(category);
 		c.setUsername("christianboada");
 		c.setEmail("cristian@tayrosoft.com");
@@ -40,18 +40,19 @@ public class CustomersTableSeeder {
 		c.setPostcode("14");
 		c.setDepartment("Magdalena");
 		c.setCity("Santa Marta");
-		
+		c.setImage("avatar.png");
+
 		CreditCard card = new CreditCard();
 		card.setNumber("123456789");
 		card.setType("Master Card");
 		card.setExpires_at(new Date());
 		card.setCvv("1234");
 		c.setCard(card);
-		
+
 		customerList.add(c);
-		
+
 		customerRepository.save(c);
-		
+
 		return customerList;
 	}
 }
