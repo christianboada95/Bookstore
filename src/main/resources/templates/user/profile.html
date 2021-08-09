@@ -81,7 +81,7 @@
 	                <div class="row">
 	                    <div class="mx-auto mt-3">
 	                        <form id="imageForm" method="POST" enctype="multipart/form-data">
-	                            <input type="file" name="image" id="image">
+	                            <input type="file" name="image" id="image" class="d-none">
 	                            <button type="button" id="btnImageUpdate" class="btn btn-primary">Cambiar</button>
 	                        </form>
 	                    </div>
@@ -96,46 +96,53 @@
 	                            <form class="user" id="userForm" method="POST">
 	                                <div class="form-group row">
 	                                    <div class="col-sm-6 mb-3 mb-sm-0">
+											<label for="Names">Nombre</label>
 	                                        <input type="text" class="form-control form-control-user" id="Names"
 	                                            placeholder="Nombres" name="names"
-	                                            value="" disabled>
+	                                            value="" disabled required pattern="[a-zA-Z ]{2,48}">
 	                                    </div>
 	                                    <div class="col-sm-6">
+											<label for="LastNames">Apellidos</label>
 	                                        <input type="text" class="form-control form-control-user" id="LastNames"
 	                                            placeholder="Apellidos" name="last_names"
-	                                            value="" disabled>
+	                                            value="" disabled required pattern="[a-zA-Z ]{2,80}">
 	                                    </div>
 	                                </div>
 	                                <div class="form-group">
+										<label for="Email">Email</label>
 	                                    <input type="email" class="form-control form-control-user" id="Email"
 	                                        placeholder="Email" name="email" value=""
-	                                        disabled>
+	                                        disabled required pattern="^[a-zA-Z0-9.!#$%&’*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$">
 	                                </div>
 	                                <div class="form-group row">
 	                                    <div class="col-8">
+											<label for="Address">Dirección</label>
 	                                    	<input type="text" class="form-control form-control-user" id="Address"
 	                                        placeholder="Dirección" name="address"
 	                                        value=""
-	                                        disabled>
+	                                        disabled required pattern="^[-a-zA-Z0-9# ]*$">
 	                                    </div>
 	                                    <div class="col-4">
-	                                    	<input type="text" class="form-control form-control-user" id="postal"
+											<label for="postal">Código postal</label>
+	                                    	<input type="number" class="form-control form-control-user" id="postal"
 	                                        placeholder="Codigo Postal" name="postal"
 	                                        value=""
-	                                        disabled>
+	                                        disabled required>
 	                                    </div>
 	                                </div>
 	                                <div class="form-group row">
 	                                    <div class="col">
-											<select disabled id="department" class="form-control asd valid" name="department" required="" aria-invalid="false">
-												<option value="nn" selected="">-- Clic para seleccionar --</option>
+											<label for="department">Departamento</label>
+											<select disabled aria-required="true" id="department" class="form-control asd valid" name="department" required="" aria-invalid="false">
 												<option value="Magdalena">Magdalena</option>
+												<option value="Atlantico">Atlantico</option>
 											</select>
 										</div>
 										<div class="col">
-											<select disabled id="city" class="form-control asd valid" name="city" required="" aria-invalid="false">
-												<option value="nn" selected="">-- Clic para seleccionar --</option>
+											<label for="city">Ciudad</label>
+											<select disabled aria-required="true" id="city" class="form-control asd valid" name="city" required="" aria-invalid="false">
 												<option value="Santa Marta">Santa Marta</option>
+												<option value="Barranquilla">Barranquilla</option>
 											</select>
 										</div>
 	                                </div>

@@ -64,6 +64,7 @@ $("#image").change(function () {
         let ruta = "/image/" + response.image + "?" + new Date().getTime();
         $("#profileImg").attr("src", ruta);
         //$("#profileImgNavbar").attr("src", ruta);
+        $("#image").val("");
       },
       error: function (e) {
         console.log("error: ", e);
@@ -96,6 +97,7 @@ $("#btn-cancel").click(function () {
   $("#btn-edit").show();
 
   inputsDisable(true);
+  loadingAjax();
 });
 
 $("#userForm").submit(function (e) {
@@ -119,7 +121,12 @@ $("#userForm").submit(function (e) {
       headers: { Authorization: token },
       data: JSON.stringify(userdata),
       beforeSend: function () {},
-      success: (data) => {},
+      success: (data) => {
+        Swal.fire({
+          type: "success",
+          title: "Actualización Exitosa",
+        });
+      },
       error: (err) => {
         sessionStorage.removeItem("token");
         window.location.href = "/auth/login";
