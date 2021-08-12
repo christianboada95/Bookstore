@@ -27,55 +27,54 @@ import edu.unimagdalena.bookstore.entity.CreditCard;
 import edu.unimagdalena.bookstore.entity.Order;
 
 @Entity
-@Table(name="customers")
+@Table(name = "customers")
 public class Customer {
-	
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private long id;
-	
-	@Column(unique=true,nullable=false, length=16)
+
+	@Column(unique = true, nullable = false, length = 16)
 	private String username;
-	
+
 	@Email
-	@Column(unique=true,nullable=false, length=128)
+	@Column(unique = true, nullable = false, length = 128)
 	private String email;
-	
-	@Column(unique=true,nullable=false, length=128)
+
+	@Column(unique = true, nullable = false, length = 128)
 	private String password;
-	
+
 	private String name;
 	private String surname;
 	private String address;
 	private String postcode;
 	private String department;
 	private String city;
-	
-	@ManyToMany(cascade = CascadeType.ALL, fetch=FetchType.LAZY)
-    @JoinTable(name = "customer_category",
-        		joinColumns = @JoinColumn(name = "customer_id", referencedColumnName = "id"),
-        		inverseJoinColumns = @JoinColumn(name = "category_id", referencedColumnName = "id"))
-    private Set<Category> categories;
-	
+	private String image;
+
+	@ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+	@JoinTable(name = "customer_category", joinColumns = @JoinColumn(name = "customer_id", referencedColumnName = "id"), inverseJoinColumns = @JoinColumn(name = "category_id", referencedColumnName = "id"))
+	private Set<Category> categories;
+
 	@JsonIgnore
 	@OneToMany(mappedBy = "client", cascade = CascadeType.ALL)
 	private Set<Order> order;
-	
+
 	@OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
 	@JsonBackReference
-    @JoinColumn(unique = true, nullable=true)
+	@JoinColumn(unique = true, nullable = true)
 	private CreditCard card;
 
 	public Customer() {
 		// TODO Auto-generated constructor stub
 	}
-	
+
 	public Customer(CreditCard card) {
 		this.card = card;
 		this.card.setCustomer(this);
 	}
-	
-	public Customer(Category...categories) {
+
+	public Customer(Category... categories) {
 		this.categories = Stream.of(categories).collect(Collectors.toSet());
 		this.categories.forEach(x -> x.getCustomers().add(this));
 	}
@@ -154,6 +153,14 @@ public class Customer {
 
 	public void setCity(String city) {
 		this.city = city;
+	}
+
+	public String getImage() {
+		return image;
+	}
+
+	public void setImage(String image) {
+		this.image = image;
 	}
 
 	public CreditCard getCard() {
