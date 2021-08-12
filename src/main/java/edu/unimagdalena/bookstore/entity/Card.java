@@ -13,26 +13,29 @@ import com.fasterxml.jackson.annotation.JsonManagedReference;
 import edu.unimagdalena.bookstore.entity.users.Customer;
 
 @Entity
-public class CreditCard {
-	
+public class Card {
+
 	@Id
-	@Column(unique=true,nullable=false, length=32)
+	@Column(unique = true, nullable = false, length = 32)
 	private String number;
-	
-	@Column(unique=true,nullable=false, length=4)
+
+	@Column(unique = true, nullable = false, length = 4)
 	private String cvv;
-	
-	@Column(nullable=false)
+
+	@Column(nullable = false)
 	private String type;
-	
-	@Column(nullable=false)
+
+	@Column(nullable = false)
+	private String emisor;
+
+	@Column(nullable = false)
 	private Date expires_at;
-	
+
 	@OneToOne(fetch = FetchType.LAZY, mappedBy = "card")
 	@JsonManagedReference
 	private Customer customer;
 
-	public CreditCard() {
+	public Card() {
 		// TODO Auto-generated constructor stub
 	}
 
@@ -68,6 +71,14 @@ public class CreditCard {
 		this.type = type;
 	}
 
+	public String getEmisor() {
+		return emisor;
+	}
+
+	public void setEmisor(String emisor) {
+		this.emisor = emisor;
+	}
+
 	public Date getExpires_at() {
 		return expires_at;
 	}
@@ -75,5 +86,5 @@ public class CreditCard {
 	public void setExpires_at(Date expires_at) {
 		this.expires_at = expires_at;
 	}
-	
+
 }

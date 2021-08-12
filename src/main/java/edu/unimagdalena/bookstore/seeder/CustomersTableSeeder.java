@@ -9,7 +9,7 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import com.github.javafaker.Faker;
 
 import edu.unimagdalena.bookstore.entity.Category;
-import edu.unimagdalena.bookstore.entity.CreditCard;
+import edu.unimagdalena.bookstore.entity.Card;
 import edu.unimagdalena.bookstore.entity.users.Customer;
 import edu.unimagdalena.bookstore.repository.CustomerRepository;
 
@@ -42,9 +42,10 @@ public class CustomersTableSeeder {
 		c.setCity("Santa Marta");
 		c.setImage("avatar.png");
 
-		CreditCard card = new CreditCard();
+		Card card = new Card();
 		card.setNumber("123456789");
-		card.setType("Master Card");
+		card.setType("Credito");
+		card.setEmisor("Master Card");
 		card.setExpires_at(new Date());
 		card.setCvv("1234");
 		c.setCard(card);

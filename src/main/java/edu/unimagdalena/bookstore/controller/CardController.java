@@ -5,9 +5,9 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @RequestMapping("/api")
-public class CreditCardController {
+public class CardController {
 
-	public CreditCardController() {
+	public CardController() {
 		// TODO Auto-generated constructor stub
 	}
 

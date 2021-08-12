@@ -23,7 +23,7 @@ import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import edu.unimagdalena.bookstore.entity.Category;
-import edu.unimagdalena.bookstore.entity.CreditCard;
+import edu.unimagdalena.bookstore.entity.Card;
 import edu.unimagdalena.bookstore.entity.Order;
 
 @Entity
@@ -63,13 +63,13 @@ public class Customer {
 	@OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
 	@JsonBackReference
 	@JoinColumn(unique = true, nullable = true)
-	private CreditCard card;
+	private Card card;
 
 	public Customer() {
 		// TODO Auto-generated constructor stub
 	}
 
-	public Customer(CreditCard card) {
+	public Customer(Card card) {
 		this.card = card;
 		this.card.setCustomer(this);
 	}
@@ -163,11 +163,11 @@ public class Customer {
 		this.image = image;
 	}
 
-	public CreditCard getCard() {
+	public Card getCard() {
 		return card;
 	}
 
-	public void setCard(CreditCard card) {
+	public void setCard(Card card) {
 		this.card = card;
 	}
 
