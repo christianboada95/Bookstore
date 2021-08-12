@@ -42,13 +42,17 @@ class shoppingCart {
 		} else {
 			console.log("Producto no esta en el carrito");
 		}
+		this.updateTotal();
 	}
 	
 	updateTotal() {
 		if(this.details.length > 0) {
+			var newTotal = 0;
+
 			this.details.forEach(d => {
-				this.total += d.book.price * d.quantity;
+				newTotal += d.book.price * d.quantity;
 			})
+			this.total = newTotal;
 		} else {
 			this.total = 0;
 		}
@@ -126,7 +130,7 @@ function showCart() {
 function addOrder(id) {
 	//alert(id);
 	var cant = $("#item-cantidad-"+ id).val();
-	console.log(cant);
+	
 	getBook(id, (book) => {
 		
 
