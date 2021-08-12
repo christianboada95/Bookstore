@@ -42,9 +42,12 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 		 * no requiere autenticación 5. Se indica que el resto de URLs esten securizadas
 		 */
 		httpSecurity.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS).and().cors().and()
-				.csrf().disable().authorizeRequests().antMatchers("/", "/store", "/book", "/cart", "/profile", "/admin")
-				.permitAll().antMatchers("/auth/**").permitAll().antMatchers("/api/**").permitAll()
-				.antMatchers(HttpMethod.POST, LOGIN_URL).permitAll().antMatchers(HttpMethod.POST, AUTH_URL).permitAll()
+				.csrf().disable().authorizeRequests()
+				.antMatchers("/", "/store", "/book", "/cart", "/profile", "/admin", "/shopping").permitAll()
+				.antMatchers("/auth/**").permitAll()
+				.antMatchers("/api/**").permitAll()
+				.antMatchers(HttpMethod.POST, LOGIN_URL).permitAll()
+				.antMatchers(HttpMethod.POST, AUTH_URL).permitAll()
 				.anyRequest().authenticated().and()
 				// .formLogin()
 				// .loginPage("/auth/login")

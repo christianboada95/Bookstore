@@ -18,6 +18,8 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import edu.unimagdalena.bookstore.entity.users.Customer;
 
 @Entity
@@ -39,6 +41,7 @@ public class Order {
     @JoinColumn
 	private Customer client;
 	
+	@JsonIgnore
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "order", cascade = CascadeType.ALL)
 	private Set<OrderDetail> details = new HashSet<OrderDetail>();
 	

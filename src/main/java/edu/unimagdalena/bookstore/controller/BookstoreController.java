@@ -29,6 +29,11 @@ public class BookstoreController {
 		return "book/cart";
 	}
 	
+	@GetMapping("/shopping")
+	public String shopping() {
+		return "user/shopping";
+	}
+	
 	@GetMapping("/auth/login")
 	public String login() {
 		return "auth/login";

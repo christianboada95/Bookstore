@@ -80,5 +80,4 @@ function getParameterByName(name) {
 /** Testing */
 $(function(){
 	
-	
 })
