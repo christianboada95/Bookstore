@@ -8,12 +8,12 @@ import edu.unimagdalena.bookstore.entity.users.Customer;
 
 @Controller
 public class BookstoreController {
-	
+
 	@GetMapping("/")
 	public String index() {
 		return "index";
 	}
-	
+
 	@GetMapping("/store")
 	public String store() {
 		return "index";
@@ -23,32 +23,37 @@ public class BookstoreController {
 	public String book() {
 		return "book/index";
 	}
-	
+
 	@GetMapping("/cart")
 	public String cart() {
 		return "book/cart";
 	}
-	
+
 	@GetMapping("/shopping")
 	public String shopping() {
 		return "user/shopping";
 	}
-	
+
 	@GetMapping("/auth/login")
 	public String login() {
 		return "auth/login";
 	}
-	
+
 	@GetMapping("/auth/register")
 	public String register() {
 		return "auth/register";
 	}
-	
+
 	@GetMapping("/profile")
 	public String profile() {
 		return "user/profile";
 	}
-	
+
+	@GetMapping("/addBook")
+	public String addBook() {
+		return "user/addBook";
+	}
+
 	@GetMapping("/admin")
 	public String admin() {
 		return "admin/admin";
