@@ -1,11 +1,22 @@
+class Card {
+	constructor(number, type, emisor, date, cvv){
+		this.number = number;
+		this.type = type;
+		this.emisor = emisor;
+		this.date = date;
+		this.cvv = cvv;
+	}
+}
+
 /** Order Obj*/
 class Order {
-	constructor(client, shipping, details) {
+	constructor(client, shipping, details, card) {
 		this.client = client;
 		//this.date = date;
 		//this.total = total;
 		this.shipping = shipping
 		this.details = details;
+		this.card = card;
 	}
 }
 class OrderDetail {

@@ -61,16 +61,18 @@ class shoppingCart {
 		$('#total').html('<strong>Total: $'+ this.total +'</strong>');
 	}
 	
-	buyOrder(client, shipping) {
+	buyOrder(client, shipping, card) {
 		var order = new Order(
 				client,
 				shipping,
-				this.details
+				this.details,
+				card
 		);
-		console.log(order);
 		setOrder(order, (res) => {
-			console.log(res);
-			alert("Compra realizada con éxito");
+			Swal.fire({
+				type: 'success',
+				title: 'Compra realizada con éxito',               
+			})
 			this.remove();
 		})
 	}
@@ -148,23 +150,37 @@ function addOrder(id) {
 			//alert("agregado")
 			Swal.fire({
 				type: 'warning',
-				title: 'Libro agregado correctamente',                    
+				title: 'Libro agregado correctamente',               
 			})
 		}
 		
 	})
 }
 
+function getCard(){
+	var typeCard = $("#typeCard").val();
+	var emisorCard = $("#emisorCard").val();
+	var numberCard = $("#numberCard").val();
+	var cvv = $("#cvv").val();
+	var expire = new Date();
+
+	var card = new Card(numberCard, typeCard, emisorCard, expire, cvv);
+	
+	return card;
+}
+
 function getOrder() {
 	
 	var ship = $("#ship").val();
+	var newCard = getCard();
+
 	currentUser(user => {
-		carrito.buyOrder(user, ship);
+		carrito.buyOrder(user, ship, newCard);
 	})
 }
 
 /** Testing */
-var carrito = new shoppingCart();					// genero un carrito nuevo
+var carrito = new shoppingCart();// genero un carrito nuevo
 
 $(function(){
 	
