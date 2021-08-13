@@ -47,7 +47,9 @@
 						<li class="nav-item active">
 							<a class="nav-link" href="#">Carrito</a>
 						</li>
-
+						<li class="nav-item">
+							<a class="nav-link" th:href="@{/shopping}">Historial de Compras</a>
+						</li>
 					</ul>
 
 					<ul class="navbar-nav">
@@ -71,8 +73,9 @@
 		</div>
 	</header>
 
-	<div class="container mb-5">
+	<div class="container">
 		<div class="row mt-5">
+
 			<div class="col-md-12">
 				<h5>Carrito de compras</h5>
 				<hr>
@@ -91,114 +94,115 @@
 							</div>
 						</div>
 					</div>
-				</form>
+			</div>
+			</form>
 
-				<div class="table-responsive mb-5">
-					<table id="table-products-sales" class="table table-products-sales animated fadeInDown delay-2s">
-						<thead class="table-primary">
-							<tr>
-								<th scope="col">Libro</th>
-								<th scope="col">Descripción</th>
-								<th class="text-center" scope="col">Stock</th>
-								<th scope="col">Cantidad</th>
-								<th scope="col">Precio</th>
-								<th class="text-center" scope="col">Acción</th>
-							</tr>
-						</thead>
+			<div class="table-responsive mb-5">
+				<table id="table-products-sales" class="table table-products-sales animated fadeInDown delay-2s">
+					<thead class="table-primary">
+						<tr>
+							<th scope="col">Libro</th>
+							<th scope="col">Descripción</th>
+							<th class="text-center" scope="col">Stock</th>
+							<th scope="col">Cantidad</th>
+							<th scope="col">Precio</th>
+							<th class="text-center" scope="col">Acción</th>
+						</tr>
+					</thead>
 
-						<tbody>
+					<tbody>
 
 
-						</tbody>
-					</table>
-					<div class="col-12 text-right">
-						<span id="total"><strong>$0</strong></span>
-					</div>
+					</tbody>
+				</table>
+				<div class="col-12 text-right">
+					<span id="total"><strong>$0</strong></span>
 				</div>
-
-
-				<div class="container mb-5">
-					<div class="col-12 pt-3 pb-2">
-						<hr>
-						<h5>Método de pago</h5>
-						<hr>
-					</div>
-
-					<div class="row justify-content-center">
-						<div class="col-5">
-							<div class="form-group">
-								<label for="typeCard">Tipo de Tarjeta</label>
-								<select id="typeCard" class="form-control">
-									<option th:value="Credito" selected>Crédito</option>
-									<option th:value="Debito">Débito</option>
-								</select>
-							</div>
-						</div>
-
-						<div class="col-5">
-							<div class="form-group">
-								<label for="emisorCard">Emisor de tarjeta</label>
-								<select id="emisorCard" class="form-control asd">
-									<option selected>-- Clic para seleccionar --</option>
-									<option>Visa</option>
-									<option>MasterCard</option>
-									<option>American Express</option>
-								</select>
-							</div>
-						</div>
-					</div>
-
-					<div class="row justify-content-center">
-						<div class="col-5">
-							<div class="form-group">
-								<label for="dateExpire">Fecha de expiración</label>
-								<select id="dateExpire" class="form-control asd">
-									<option selected>-- Mes --</option>
-									<option value="1">Enero</option>
-									<option value="2">Febrero</option>
-									<option value="3">Marzo</option>
-									<option value="4">Abril</option>
-									<option value="5">Mayo</option>
-									<option value="6">Junio</option>
-									<option value="7">Julio</option>
-									<option value="8">Agosto</option>
-									<option value="9">Septiembre</option>
-									<option value="10">Octubre</option>
-									<option value="11">Noviembre</option>
-									<option value="12">Diciembre</option>
-								</select>
-							</div>
-						</div>
-
-						<div class="col-5">
-							<div class="form-group">
-								<label for="yearCard">Año</label>
-								<input type="number" class="form-control asd" id="yearCard" placeholder="Año">
-							</div>
-						</div>
-					</div>
-
-					<div class="row justify-content-center">
-						<div class="col-5">
-							<div class="form-group">
-								<label for="numberCard">Número de tarjeta</label>
-								<input type="number" class="form-control asd" id="numberCard"
-									placeholder="Ingrese el número de tarjeta">
-							</div>
-						</div>
-						<div class="col-5">
-							<div class="form-group">
-								<label for="cvv">Código de seguridad</label>
-								<input type="number" class="form-control asd" id="cvv" placeholder="CCV">
-							</div>
-						</div>
-					</div>
-				</div>
-
-				<button type="button" class="btn btn-primary btn-block" onclick="getOrder()"> Confirmar compra </button>
 			</div>
 
+
+			<div class="container mb-5">
+				<div class="col-12 pt-3 pb-2">
+					<hr>
+					<h5>Método de pago</h5>
+					<hr>
+				</div>
+
+				<div class="row justify-content-center">
+					<div class="col-5">
+						<div class="form-group">
+							<label for="typeCard">Tipo de Tarjeta</label>
+							<select id="typeCard" class="form-control">
+								<option th:value="Credito" selected>Crédito</option>
+								<option th:value="Debito">Débito</option>
+							</select>
+						</div>
+					</div>
+
+					<div class="col-5">
+						<div class="form-group">
+							<label for="emisorCard">Emisor de tarjeta</label>
+							<select id="emisorCard" class="form-control asd">
+								<option selected>-- Clic para seleccionar --</option>
+								<option>Visa</option>
+								<option>MasterCard</option>
+								<option>American Express</option>
+							</select>
+						</div>
+					</div>
+				</div>
+
+				<div class="row justify-content-center">
+					<div class="col-5">
+						<div class="form-group">
+							<label for="dateExpire">Fecha de expiración</label>
+							<select id="dateExpire" class="form-control asd">
+								<option selected>-- Mes --</option>
+								<option value="1">Enero</option>
+								<option value="2">Febrero</option>
+								<option value="3">Marzo</option>
+								<option value="4">Abril</option>
+								<option value="5">Mayo</option>
+								<option value="6">Junio</option>
+								<option value="7">Julio</option>
+								<option value="8">Agosto</option>
+								<option value="9">Septiembre</option>
+								<option value="10">Octubre</option>
+								<option value="11">Noviembre</option>
+								<option value="12">Diciembre</option>
+							</select>
+						</div>
+					</div>
+
+					<div class="col-5">
+						<div class="form-group">
+							<label for="yearCard">Año</label>
+							<input type="number" class="form-control asd" id="yearCard" placeholder="Año">
+						</div>
+					</div>
+				</div>
+
+				<div class="row justify-content-center">
+					<div class="col-5">
+						<div class="form-group">
+							<label for="numberCard">Número de tarjeta</label>
+							<input type="number" class="form-control asd" id="numberCard"
+								placeholder="Ingrese el número de tarjeta">
+						</div>
+					</div>
+					<div class="col-5">
+						<div class="form-group">
+							<label for="cvv">Código de seguridad</label>
+							<input type="number" class="form-control asd" id="cvv" placeholder="CCV">
+						</div>
+					</div>
+				</div>
+			</div>
+
+			<button type="button" class="btn btn-primary btn-block" onclick="getOrder()"> Confirmar compra </button>
 		</div>
+
+	</div>
 	</div>
 
 
