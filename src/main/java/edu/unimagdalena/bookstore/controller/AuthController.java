@@ -19,45 +19,41 @@ import edu.unimagdalena.bookstore.validator.CustomerValidator;
 @RestController
 @RequestMapping("api/auth")
 public class AuthController {
-	
-	@Autowired
-	private CustomerRepository customerRepository;
-	
+
+    @Autowired
+    private CustomerRepository customerRepository;
+
     @Autowired
     private CustomerValidator customerValidator;
-    
+
     @Autowired
     private BCryptPasswordEncoder bCryptPasswordEncoder;
-    
+
     @GetMapping("/user")
-	public Customer user(Principal principal) {
-    	
-    	String username = principal.getName();
-    	return customerRepository.findByUsername(username);
-	}
-	
-	@PostMapping("/register")
+    public Customer user(Principal principal) {
+
+        String username = principal.getName();
+        return customerRepository.findByUsername(username);
+    }
+
+    @PostMapping("/register")
     public ResponseEntity<Customer> registration(@RequestBody Customer user, BindingResult bindingResult) {
         customerValidator.validate(user, bindingResult);
 
         if (bindingResult.hasErrors()) {
             return ResponseEntity.badRequest().build();
         }
-        
+
         user.setPassword(bCryptPasswordEncoder.encode(user.getPassword()));
-        
+
         customerRepository.save(user);
-        
-        if (user.getCard() != null) {
-			System.out.println("Card");
-		}
-        
+
         return ResponseEntity.ok().body(user);
     }
-	
-	@GetMapping("/logout")
-	public String logout() {
-		return "auth/login";
-	}
-	
+
+    @GetMapping("/logout")
+    public String logout() {
+        return "auth/login";
+    }
+
 }

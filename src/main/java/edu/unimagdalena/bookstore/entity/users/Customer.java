@@ -15,15 +15,12 @@ import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
-import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.validation.constraints.Email;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import edu.unimagdalena.bookstore.entity.Category;
-import edu.unimagdalena.bookstore.entity.Card;
 import edu.unimagdalena.bookstore.entity.Order;
 
 @Entity
@@ -60,18 +57,8 @@ public class Customer {
 	@OneToMany(mappedBy = "client", cascade = CascadeType.ALL)
 	private Set<Order> order;
 
-	@OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-	@JsonBackReference
-	@JoinColumn(unique = true, nullable = true)
-	private Card card;
-
 	public Customer() {
 		// TODO Auto-generated constructor stub
-	}
-
-	public Customer(Card card) {
-		this.card = card;
-		this.card.setCustomer(this);
 	}
 
 	public Customer(Category... categories) {
@@ -161,14 +148,6 @@ public class Customer {
 
 	public void setImage(String image) {
 		this.image = image;
-	}
-
-	public Card getCard() {
-		return card;
-	}
-
-	public void setCard(Card card) {
-		this.card = card;
 	}
 
 	public Set<Category> getCategories() {

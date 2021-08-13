@@ -16,39 +16,48 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
+
+import com.fasterxml.jackson.annotation.JsonBackReference;
 
 import edu.unimagdalena.bookstore.entity.users.Customer;
 
 @Entity
-@Table(name="orders")
+@Table(name = "orders")
 public class Order {
-	
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
-	
-	@Column(unique=true,nullable=false, length=24)
+
+	@Column(unique = true, nullable = false, length = 24)
 	private String code;
-	
+
 	private Date date;
 	private Integer total;
-	private String shipping; //correo normal, expreso, internacional o courier
-	
+	private String shipping; // correo normal, expreso, internacional o courier
+
 	@ManyToOne
-    @JoinColumn
+	@JoinColumn
 	private Customer client;
-	
+
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "order", cascade = CascadeType.ALL)
 	private Set<OrderDetail> details = new HashSet<OrderDetail>();
-	
+
+	@OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+	@JsonBackReference
+	@JoinColumn(unique = true, nullable = true)
+	private Card card;
+
 	public Order() {
 		// TODO Auto-generated constructor stub
 	}
-	
-	public Order(Customer client, OrderDetail...details) {
+
+	public Order(Customer client, OrderDetail... details) {
 		this.client = client;
-		for(OrderDetail detail : details) detail.setOrder(this);
+		for (OrderDetail detail : details)
+			detail.setOrder(this);
 		this.details = Stream.of(details).collect(Collectors.toSet());
 	}
 
@@ -80,6 +89,14 @@ public class Order {
 		this.details = details;
 	}
 
+	public Card getCard() {
+		return card;
+	}
+
+	public void setCard(Card card) {
+		this.card = card;
+	}
+
 	public String getCode() {
 		return code;
 	}
@@ -103,5 +120,5 @@ public class Order {
 	public void setShipping(String shipping) {
 		this.shipping = shipping;
 	}
-	
+
 }

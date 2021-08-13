@@ -15,7 +15,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 @Entity
 @Table(name = "order_details")
 public class OrderDetail implements Serializable {
-	
+
 	/**
 	 * 
 	 */
@@ -23,16 +23,16 @@ public class OrderDetail implements Serializable {
 
 	@Id
 	@ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "book_id")
+	@JoinColumn(name = "book_id")
 	private Book book;
-	
+
 	@Id
 	@ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "order_id")
+	@JoinColumn(name = "order_id")
 	@JsonIgnore
 	private Order order;
-	
-	@Column(nullable=false)
+
+	@Column(nullable = false)
 	private Integer quantity;
 
 	public OrderDetail() {
@@ -62,5 +62,5 @@ public class OrderDetail implements Serializable {
 	public void setQuantity(Integer quantity) {
 		this.quantity = quantity;
 	}
-	
+
 }

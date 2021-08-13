@@ -10,8 +10,6 @@ import javax.persistence.OneToOne;
 
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 
-import edu.unimagdalena.bookstore.entity.users.Customer;
-
 @Entity
 public class Card {
 
@@ -33,7 +31,7 @@ public class Card {
 
 	@OneToOne(fetch = FetchType.LAZY, mappedBy = "card")
 	@JsonManagedReference
-	private Customer customer;
+	private Order order;
 
 	public Card() {
 		// TODO Auto-generated constructor stub
@@ -47,12 +45,12 @@ public class Card {
 		this.cvv = cvv;
 	}
 
-	public Customer getCustomer() {
-		return customer;
+	public Order getOrder() {
+		return order;
 	}
 
-	public void setCustomer(Customer customer) {
-		this.customer = customer;
+	public void setOrder(Order order) {
+		this.order = order;
 	}
 
 	public String getNumber() {

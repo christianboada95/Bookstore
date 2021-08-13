@@ -1,7 +1,6 @@
 package edu.unimagdalena.bookstore.seeder;
 
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.Locale;
 
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -9,7 +8,6 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import com.github.javafaker.Faker;
 
 import edu.unimagdalena.bookstore.entity.Category;
-import edu.unimagdalena.bookstore.entity.Card;
 import edu.unimagdalena.bookstore.entity.users.Customer;
 import edu.unimagdalena.bookstore.repository.CustomerRepository;
 
@@ -41,14 +39,6 @@ public class CustomersTableSeeder {
 		c.setDepartment("Magdalena");
 		c.setCity("Santa Marta");
 		c.setImage("avatar.png");
-
-		Card card = new Card();
-		card.setNumber("123456789");
-		card.setType("Credito");
-		card.setEmisor("Master Card");
-		card.setExpires_at(new Date());
-		card.setCvv("1234");
-		c.setCard(card);
 
 		customerList.add(c);
 

@@ -52,7 +52,7 @@ public class BooksTableSeeder {
 		Book b = new Book(at, ps, best);
 		b.setISBN(faker.letterify("B??kst?r??????"));
 		b.setTitle(faker.book().title());
-		b.setDescription("faker.lorem().characters(200)");
+		b.setDescription(faker.lorem().paragraph());
 		b.setCover("http://localhost:8080/img/" + "portada.jpg");
 		b.setPages(faker.number().numberBetween(50, 500));
 		b.setPrice(faker.number().numberBetween(20000, 150000));
