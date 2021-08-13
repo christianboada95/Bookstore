@@ -20,6 +20,9 @@ import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 import edu.unimagdalena.bookstore.entity.users.Customer;
 
@@ -43,6 +46,8 @@ public class Order {
 	private Customer client;
 
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "order", cascade = CascadeType.ALL)
+	// @JsonManagedReference
+	@JsonIgnoreProperties({ "hibernateLazyInitializer", "handler" })
 	private Set<OrderDetail> details = new HashSet<OrderDetail>();
 
 	@OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)

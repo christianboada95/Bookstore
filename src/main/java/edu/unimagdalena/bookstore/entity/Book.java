@@ -21,57 +21,58 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 @Entity
-@Table(name="books")
+@Table(name = "books")
 public class Book {
-	
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
-	
-	@Column(unique=true, nullable=false, length=32)
+
+	@Column(unique = true, nullable = false, length = 32)
 	private String isbn;
-	@Column(nullable=false)
+	@Column(nullable = false)
 	private String title;
-	@Column(nullable=false)
+	@Column(nullable = false)
 	private Integer stock;
-	@Column(nullable=false)
+	@Column(nullable = false)
 	private Integer price;
-	
+
+	@Column(nullable = true)
 	private String description;
 	private String cover;
 	private Integer pages;
 	private Integer qualification;
 	private Date release_at;
-	
+
 	@ManyToOne
-    @JoinColumn
-    private Author author;
-	
-	//@JsonIgnore
-    //@JsonBackReference(value = "publisherbooks")
-	//@JsonManagedReference(value = "publisherbooks")
-    @ManyToOne(fetch = FetchType.EAGER)
-    @JoinColumn
-    private Publisher publisher;
-	
-	//@JsonIgnore
-	//@JsonManagedReference
-	@ManyToMany(cascade = CascadeType.ALL, fetch=FetchType.LAZY)
-    @JoinTable(name = "book_category",
-        		joinColumns = @JoinColumn(name = "book_id", referencedColumnName = "id"),
-        		inverseJoinColumns = @JoinColumn(name = "category_id", referencedColumnName = "id"))
-    private Set<Category> categories;
-	
+	@JoinColumn
+	private Author author;
+
+	// @JsonIgnore
+	// @JsonBackReference(value = "publisherbooks")
+	// @JsonManagedReference(value = "publisherbooks")
+	@ManyToOne(fetch = FetchType.EAGER)
+	@JoinColumn
+	private Publisher publisher;
+
+	// @JsonIgnore
+	// @JsonManagedReference
+	@ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+	@JoinTable(name = "book_category", joinColumns = @JoinColumn(name = "book_id", referencedColumnName = "id"), inverseJoinColumns = @JoinColumn(name = "category_id", referencedColumnName = "id"))
+	private Set<Category> categories;
+
 	@JsonIgnore
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "book", cascade = CascadeType.ALL)
+	@JsonIgnoreProperties({ "hibernateLazyInitializer", "handler" })
 	private Set<OrderDetail> details = new HashSet<OrderDetail>();
 
 	public Book() {
 		// TODO Auto-generated constructor stub
 	}
-	
+
 	public Book(String isbn, String title, Author author, Publisher publisher, Set<Category> categories) {
 		super();
 		this.isbn = isbn;
@@ -80,17 +81,17 @@ public class Book {
 		this.publisher = publisher;
 		this.categories = categories;
 	}
-	
-	public Book(Author author, Publisher publisher, Category...categories) {
-		
+
+	public Book(Author author, Publisher publisher, Category... categories) {
+
 		this.author = author;
 		this.publisher = publisher;
 		this.categories = Stream.of(categories).collect(Collectors.toSet());
 		this.categories.forEach(x -> x.getBooks().add(this));
 	}
-	
-	public Book(Category...categories) {
-		
+
+	public Book(Category... categories) {
+
 		this.categories = Stream.of(categories).collect(Collectors.toSet());
 		this.categories.forEach(x -> x.getBooks().add(this));
 	}

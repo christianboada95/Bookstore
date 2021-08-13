@@ -52,6 +52,7 @@ function getOrder(id, callback) {
         contentType: "application/json",
         headers: {"Authorization": sessionStorage.getItem('token')},
         success: function(data) { 
+			console.log(data);
             var p = JSON.parse(JSON.stringify(data));
 			callback(p);
         },
@@ -63,7 +64,7 @@ function getOrder(id, callback) {
 }
 
 function setOrder(order, callback) {
-	
+	console.log(order)
 	$.ajax('api/orders', {
 		type: "POST",
 		contentType: "application/json",

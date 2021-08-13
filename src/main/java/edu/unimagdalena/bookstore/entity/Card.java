@@ -8,6 +8,7 @@ import javax.persistence.FetchType;
 import javax.persistence.Id;
 import javax.persistence.OneToOne;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 @Entity
@@ -30,7 +31,8 @@ public class Card {
 	private Date expires_at;
 
 	@OneToOne(fetch = FetchType.LAZY, mappedBy = "card")
-	@JsonManagedReference
+	// @JsonManagedReference
+	@JsonIgnoreProperties({ "hibernateLazyInitializer", "handler" })
 	private Order order;
 
 	public Card() {
