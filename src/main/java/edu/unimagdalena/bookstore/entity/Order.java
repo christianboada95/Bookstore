@@ -41,17 +41,22 @@ public class Order {
 	private Integer total;
 	private String shipping; // correo normal, expreso, internacional o courier
 
+	@JsonIgnore
 	@ManyToOne
 	@JoinColumn
+	@JsonIgnoreProperties({ "hibernateLazyInitializer", "handler" })
 	private Customer client;
 
+	@JsonIgnore
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "order", cascade = CascadeType.ALL)
 	// @JsonManagedReference
 	@JsonIgnoreProperties({ "hibernateLazyInitializer", "handler" })
 	private Set<OrderDetail> details = new HashSet<OrderDetail>();
 
+	@JsonIgnore
 	@OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-	@JsonBackReference
+	// @JsonBackReference
+	@JsonIgnoreProperties({ "hibernateLazyInitializer", "handler" })
 	@JoinColumn(unique = true, nullable = true)
 	private Card card;
 

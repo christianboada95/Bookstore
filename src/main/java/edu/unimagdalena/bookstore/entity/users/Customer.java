@@ -19,6 +19,7 @@ import javax.persistence.Table;
 import javax.validation.constraints.Email;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import edu.unimagdalena.bookstore.entity.Category;
 import edu.unimagdalena.bookstore.entity.Order;
@@ -49,12 +50,15 @@ public class Customer {
 	private String city;
 	private String image;
 
+	@JsonIgnore
 	@ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
 	@JoinTable(name = "customer_category", joinColumns = @JoinColumn(name = "customer_id", referencedColumnName = "id"), inverseJoinColumns = @JoinColumn(name = "category_id", referencedColumnName = "id"))
+	@JsonIgnoreProperties({ "hibernateLazyInitializer", "handler" })
 	private Set<Category> categories;
 
 	@JsonIgnore
 	@OneToMany(mappedBy = "client", cascade = CascadeType.ALL)
+	@JsonIgnoreProperties({ "hibernateLazyInitializer", "handler" })
 	private Set<Order> order;
 
 	public Customer() {

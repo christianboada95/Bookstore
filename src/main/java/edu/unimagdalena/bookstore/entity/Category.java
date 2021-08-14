@@ -14,33 +14,36 @@ import javax.persistence.Table;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import edu.unimagdalena.bookstore.entity.users.Customer;
 
 @Entity
-@Table(name="categories")
+@Table(name = "categories")
 public class Category {
-	
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
-	
-	@Column(nullable=false)
+
+	@Column(nullable = false)
 	private String name;
-	
-	@ManyToMany(mappedBy = "categories", fetch=FetchType.EAGER)
-	//@JsonBackReference
+
 	@JsonIgnore
-    private Set<Book> books = new HashSet<>();
-	
-	@ManyToMany(mappedBy = "categories", fetch=FetchType.EAGER)
+	@ManyToMany(mappedBy = "categories", fetch = FetchType.EAGER)
+	// @JsonBackReference
+	@JsonIgnoreProperties({ "hibernateLazyInitializer", "handler" })
+	private Set<Book> books = new HashSet<>();
+
 	@JsonIgnore
-    private Set<Customer> customers = new HashSet<>();
-	
+	@ManyToMany(mappedBy = "categories", fetch = FetchType.EAGER)
+	@JsonIgnoreProperties({ "hibernateLazyInitializer", "handler" })
+	private Set<Customer> customers = new HashSet<>();
+
 	public Category() {
 		// TODO Auto-generated constructor stub
 	}
-	
+
 	public Category(String name) {
 		this.name = name;
 	}

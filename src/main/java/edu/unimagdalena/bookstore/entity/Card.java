@@ -8,6 +8,7 @@ import javax.persistence.FetchType;
 import javax.persistence.Id;
 import javax.persistence.OneToOne;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 
@@ -30,6 +31,7 @@ public class Card {
 	@Column(nullable = false)
 	private Date expires_at;
 
+	@JsonIgnore
 	@OneToOne(fetch = FetchType.LAZY, mappedBy = "card")
 	// @JsonManagedReference
 	@JsonIgnoreProperties({ "hibernateLazyInitializer", "handler" })

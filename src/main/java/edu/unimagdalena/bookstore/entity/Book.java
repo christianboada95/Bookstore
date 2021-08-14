@@ -47,21 +47,25 @@ public class Book {
 	private Integer qualification;
 	private Date release_at;
 
+	@JsonIgnore
 	@ManyToOne
 	@JoinColumn
+	@JsonIgnoreProperties({ "hibernateLazyInitializer", "handler" })
 	private Author author;
 
-	// @JsonIgnore
+	@JsonIgnore
 	// @JsonBackReference(value = "publisherbooks")
 	// @JsonManagedReference(value = "publisherbooks")
 	@ManyToOne(fetch = FetchType.EAGER)
 	@JoinColumn
+	@JsonIgnoreProperties({ "hibernateLazyInitializer", "handler" })
 	private Publisher publisher;
 
-	// @JsonIgnore
+	@JsonIgnore
 	// @JsonManagedReference
 	@ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
 	@JoinTable(name = "book_category", joinColumns = @JoinColumn(name = "book_id", referencedColumnName = "id"), inverseJoinColumns = @JoinColumn(name = "category_id", referencedColumnName = "id"))
+	@JsonIgnoreProperties({ "hibernateLazyInitializer", "handler" })
 	private Set<Category> categories;
 
 	@JsonIgnore

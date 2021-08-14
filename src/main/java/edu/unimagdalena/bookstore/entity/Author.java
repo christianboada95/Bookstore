@@ -14,31 +14,34 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 @Entity
-@Table(name="authors")
+@Table(name = "authors")
 public class Author {
-	
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
-	
-	@Column(nullable=false)
+
+	@Column(nullable = false)
 	private String name;
-	
+
+	@JsonIgnore
 	@OneToMany(mappedBy = "author", cascade = CascadeType.ALL)
-	@JsonBackReference
-    private Set<Book> books;
+	@JsonIgnoreProperties({ "hibernateLazyInitializer", "handler" })
+	private Set<Book> books;
 
 	public Author() {
 		// TODO Auto-generated constructor stub
 	}
-	
+
 	public Author(String name, Book... books) {
-        this.name = name;
-        this.books = Stream.of(books).collect(Collectors.toSet());
-        this.books.forEach(x -> x.setAuthor(this));
-    }
+		this.name = name;
+		this.books = Stream.of(books).collect(Collectors.toSet());
+		this.books.forEach(x -> x.setAuthor(this));
+	}
 
 	public Integer getId() {
 		return id;
@@ -59,5 +62,5 @@ public class Author {
 	public void setBooks(Set<Book> books) {
 		this.books = books;
 	}
-	
+
 }
