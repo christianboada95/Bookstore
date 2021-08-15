@@ -77,7 +77,7 @@ public class BookController {
 		book.setDescription(b.description);
 		book.setQualification(3);
 		book.setRelease_at(new Date());
-		book.setCover("http://localhost:8080/img/" + "portada.jpg");
+		book.setCover("http://localhost:8080/img/" + "portada-generica.png");
 
 		bookRepository.save(book);
 
