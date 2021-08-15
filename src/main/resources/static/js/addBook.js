@@ -14,7 +14,7 @@ function loadingAjax(div_id) {
 $("#btn-add").click(function(){
     let title = $("#title").val();
     let author = $("#author").val();
-    let publihser = $("#publisher").val();
+    let publisher = $("#publisher").val();
     let isbn = $("#isbn").val();
     let npages = $("#npages").val();
     let stock = $("#stock").val();
@@ -23,12 +23,12 @@ $("#btn-add").click(function(){
     
     let newBook = {
         title: title,
-        author: {name: author},
-        publihser: {name: publihser},
+        author: author,
+        publisher: publisher,
         isbn: isbn,
-        pages: npages,
-        stock: stock,
-        price: price,
+        pages: parseInt(npages),
+        stock: parseInt(stock),
+        price: parseInt(price),
         description: description
     }
     console.log(newBook)
@@ -37,11 +37,9 @@ $("#btn-add").click(function(){
         type: "POST",
         url: "http://localhost:8080/api/books/save",
         //headers: { Authorization: token },
-        dataType: "json",
+        //dataType: "json",
         contentType: "application/json",
         data: JSON.stringify(newBook),
-        cache: false,
-        processData: false,
         success: function(response){
             console.log(response);
         },

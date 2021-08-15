@@ -22,6 +22,7 @@ import edu.unimagdalena.bookstore.entity.Book;
 import edu.unimagdalena.bookstore.entity.Category;
 import edu.unimagdalena.bookstore.entity.Publisher;
 import edu.unimagdalena.bookstore.entity.users.Customer;
+import edu.unimagdalena.bookstore.model.BookModel;
 import edu.unimagdalena.bookstore.repository.*;
 
 @RestController
@@ -53,29 +54,34 @@ public class BookController {
 	}
 
 	@PostMapping("/books/save")
-	public void saveBook(@RequestBody Book book) {
+	public ResponseEntity<Book> saveBook(@RequestBody BookModel b) {
 		Category best = new Category("Best seller");
 
+		Book book = new Book();
+
 		Author at = new Author();
-		at.setName(book.getAuthor().getName());
+		at.setName(b.author);
 		authorRepository.save(at);
 
 		Publisher ps = new Publisher();
-		ps.setName(book.getPublisher().getName());
+		ps.setName(b.publisher);
 		publisherRepository.save(ps);
 
-		Book b = new Book(at, ps, best);
-		b.setISBN(book.getISBN());
-		b.setTitle(book.getTitle());
-		b.setDescription(book.getDescription());
-		b.setCover("http://localhost:8080/img/" + "portada.jpg");
-		b.setPages(book.getPages());
-		b.setPrice(book.getPrice());
-		b.setQualification(3);
-		b.setRelease_at(new Date());
-		b.setStock(book.getStock());
+		book.setTitle(b.title);
+		book.setAuthor(at);
+		book.setPublisher(ps);
+		book.setPages(b.pages);
+		book.setPrice(b.price);
+		book.setISBN(b.isbn);
+		book.setStock(b.stock);
+		book.setDescription(b.description);
+		book.setQualification(3);
+		book.setRelease_at(new Date());
+		book.setCover("http://localhost:8080/img/" + "portada.jpg");
 
-		bookRepository.save(b);
+		bookRepository.save(book);
+
+		return ResponseEntity.ok().body(book);
 	}
 
 	@GetMapping("/books/{id}")
