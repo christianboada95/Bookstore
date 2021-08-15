@@ -55,9 +55,9 @@ public class BookController {
 
 	@PostMapping("/books/save")
 	public ResponseEntity<Book> saveBook(@RequestBody BookModel b) {
-		Category best = new Category("Best seller");
+		Category best = new Category("fiction");
 
-		Book book = new Book();
+		Book book = new Book(best);
 
 		Author at = new Author();
 		at.setName(b.author);
