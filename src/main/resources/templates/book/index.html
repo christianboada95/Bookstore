@@ -64,7 +64,7 @@
                             <a class="nav-link profile d-none" th:href="@{/profile}">Perfil<i class=""></i></a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" th:href="@{/addBook}">Agregar libro<i class=""></i></a>
+                            <a class="nav-link d-none addBook" th:href="@{/addBook}">Agregar libro<i class=""></i></a>
                         </li>
 
                         <li class="nav-item">
@@ -100,7 +100,7 @@
                         </div>
 
                         <h5 class="mt-0" id="author">Autor: </h5>
-                        <h5 class="mt-0" id="publisher">Autor: </h5>
+                        <h5 class="mt-0" id="publisher">Editorial: </h5>
 
                         <p id="description"> </p>
                         <hr>
@@ -164,6 +164,7 @@
             if (token != null) {
                 $(".chekcToken").hide();
                 $(".profile").removeClass("d-none");
+                $(".addBook").removeClass("d-none");
             } else {
                 $(".logout").hide();
             }
