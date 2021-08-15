@@ -22,6 +22,7 @@ import javax.persistence.Table;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 @Entity
 @Table(name = "books")
@@ -47,25 +48,24 @@ public class Book {
 	private Integer qualification;
 	private Date release_at;
 
-	@JsonIgnore
 	@ManyToOne
 	@JoinColumn
-	@JsonIgnoreProperties({ "hibernateLazyInitializer", "handler" })
+	// @JsonIgnoreProperties({ "hibernateLazyInitializer", "handler" })
+	@JsonManagedReference
 	private Author author;
 
-	@JsonIgnore
 	// @JsonBackReference(value = "publisherbooks")
 	// @JsonManagedReference(value = "publisherbooks")
 	@ManyToOne(fetch = FetchType.EAGER)
 	@JoinColumn
-	@JsonIgnoreProperties({ "hibernateLazyInitializer", "handler" })
+	// @JsonIgnoreProperties({ "hibernateLazyInitializer", "handler" })
+	@JsonManagedReference
 	private Publisher publisher;
 
-	@JsonIgnore
-	// @JsonManagedReference
 	@ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
 	@JoinTable(name = "book_category", joinColumns = @JoinColumn(name = "book_id", referencedColumnName = "id"), inverseJoinColumns = @JoinColumn(name = "category_id", referencedColumnName = "id"))
-	@JsonIgnoreProperties({ "hibernateLazyInitializer", "handler" })
+	// @JsonIgnoreProperties({ "hibernateLazyInitializer", "handler" })
+	@JsonManagedReference
 	private Set<Category> categories;
 
 	@JsonIgnore

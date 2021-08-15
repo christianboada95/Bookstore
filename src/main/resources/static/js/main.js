@@ -139,8 +139,8 @@ function infobook(id){
         $( "#cover" ).replaceWith( '<img id="cover" src="' + book.cover  + '" class="card-img-top" alt="Inventario">' );
         
         $( "#title" ).replaceWith( "<h2>" + book.title  + "</h2>" );        
-        //$( "#author" ).replaceWith( "<p class='m-0'><b>Autor:</b> " + book.author.name  + "</p>" );
-        //$( "#publisher" ).replaceWith( "<p class='m-0'><b>Editorial:</b> " + book.publisher.name  + "</p>" );
+        $( "#author" ).replaceWith( "<p class='m-0'><b>Autor:</b> " + book.author.name  + "</p>" );
+        $( "#publisher" ).replaceWith( "<p class='m-0'><b>Editorial:</b> " + book.publisher.name  + "</p>" );
 
         $( "#description" ).replaceWith( "<p class='m-0 mt-1'><b>Descripción:</b> " + book.description  + "</p>" );   
 

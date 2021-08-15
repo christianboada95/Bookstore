@@ -28,9 +28,9 @@ public class Author {
 	@Column(nullable = false)
 	private String name;
 
-	@JsonIgnore
 	@OneToMany(mappedBy = "author", cascade = CascadeType.ALL)
-	@JsonIgnoreProperties({ "hibernateLazyInitializer", "handler" })
+	// @JsonIgnoreProperties({ "hibernateLazyInitializer", "handler" })
+	@JsonBackReference
 	private Set<Book> books;
 
 	public Author() {

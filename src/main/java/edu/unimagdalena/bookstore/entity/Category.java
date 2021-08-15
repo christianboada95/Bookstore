@@ -29,10 +29,9 @@ public class Category {
 	@Column(nullable = false)
 	private String name;
 
-	@JsonIgnore
 	@ManyToMany(mappedBy = "categories", fetch = FetchType.EAGER)
-	// @JsonBackReference
-	@JsonIgnoreProperties({ "hibernateLazyInitializer", "handler" })
+	@JsonBackReference
+	// @JsonIgnoreProperties({ "hibernateLazyInitializer", "handler" })
 	private Set<Book> books = new HashSet<>();
 
 	@JsonIgnore
