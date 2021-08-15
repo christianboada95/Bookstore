@@ -6,6 +6,7 @@ $(function() {
     getAllBooks( (data) => {
 
     	news = data.filter((book) => {
+            if(book.categories != null)
     		for(let i = 0; i<book.categories.length; i++){	 
     			if(book.categories[i].name == "New")
     				return true;
@@ -14,6 +15,7 @@ $(function() {
     	});
     	
     	bestSellers = data.filter((book) => {
+            if(book.categories != null)
     		for(let i = 0; i<book.categories.length; i++){	 
     			if(book.categories[i].name == "Best seller")
     				return true;
@@ -133,22 +135,24 @@ function addBook(book) {
 function infobook(id){
     
     getBook(id, (book) => {
-        //console.log(book);
+        console.log(book);
         $( "#cover" ).replaceWith( '<img id="cover" src="' + book.cover  + '" class="card-img-top" alt="Inventario">' );
         
         $( "#title" ).replaceWith( "<h2>" + book.title  + "</h2>" );        
-        $( "#author" ).replaceWith( "<p class='m-0'><b>Autor:</b> " + book.author.name  + "</p>" );
-        $( "#publisher" ).replaceWith( "<p class='m-0'><b>Editorial:</b> " + book.publisher.name  + "</p>" );
+        //$( "#author" ).replaceWith( "<p class='m-0'><b>Autor:</b> " + book.author.name  + "</p>" );
+        //$( "#publisher" ).replaceWith( "<p class='m-0'><b>Editorial:</b> " + book.publisher.name  + "</p>" );
 
         $( "#description" ).replaceWith( "<p class='m-0 mt-1'><b>Descripción:</b> " + book.description  + "</p>" );   
 
         $( "#date" ).replaceWith( "<p class='m-0 mt-1'><b>Fecha de lanzamiento:</b> " + book.release_at  + "</p>" ); 
         
-        for (const category of book.categories) {
-            $("#categories").append(
-                '<span class="badge badge-pill badge-secondary mr-2">' + category.name + '</span>'
-            );
-        }        
+        if(book.categories != null){
+            for (const category of book.categories) {
+                $("#categories").append(
+                    '<span class="badge badge-pill badge-secondary mr-2">' + category.name + '</span>'
+                );
+            } 
+        }       
         
         
         $( "#pages" ).replaceWith( "<p class='m-0 mt-1'><b>N° de páginas:</b> " + book.pages  + "</p>" ); 
